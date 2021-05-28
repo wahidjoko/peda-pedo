@@ -3,7 +3,7 @@
 
 
 <div class="col-sm-5 mt-3">
-    <img class="img-fluid pad" src="<?= base_url('logo/register.png') ?>" width="350px" alt="">
+    <img class="img-fluid pad" src="<?= base_url('logo/aktivasi.png') ?>" width="350px" alt="">
 </div>
 
 <div class="col-sm-7 mt-3">
@@ -46,15 +46,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12 col-12 mt-3">
-                    <button type="submit" class="btn btn-info btn-flat btn-block"><i class="fas fa-check"></i> Aktivasi</button>
+                <div class="col-sm-12 mt-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-flat btn-block"><i class="fas fa-check"></i> Aktivasi Akun</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php echo form_close() ?>
+    <?php echo form_close() ?>
 </div>
 
 

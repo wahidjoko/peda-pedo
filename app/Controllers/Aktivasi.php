@@ -23,11 +23,29 @@ class Aktivasi extends BaseController
 
 	public function simpanOTP()
 	{
-		$data = [
-			'otp' => $this->request->getPost('otp'),
-		];
-		// $this->ModelUser->insertData($data);
-		session()->setFlashdata('pesan', 'Aktivasi Behasil, Silahkan Login Aplikasi !!!');
-		return redirect()->to('/Aktivasi');
+		if ($this->validate(
+			[
+				'aktivasi' => [
+					'label' => 'Kode Aktivasi',
+					'rules'  => 'required',
+					'errors' => [
+						'required' => '{field} Wajib Diisi !!',
+						'max_length' => '{field} Max 16 Karakter !!',
+						// 'is_unique' => '{field} Ini Sudah Terdaftar !!',
+					]
+				],
+			]
+		)) {
+			$data = [
+				'aktivasi' => $this->request->getPost('aktivasi'),
+			];
+			// $this->ModelUser->insertData($data);
+			session()->setFlashdata('pesan', 'Aktivasi Behasil, Silahkan Login Aplikasi !!!');
+			return redirect()->to('/Aktivasi');
+		} else {
+			//jika ada validasi
+			$validation =  \Config\Services::validation();
+			return redirect()->to('/Aktivasi')->withInput()->with('validation', $validation);
+		}
 	}
 }
