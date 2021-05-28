@@ -37,7 +37,7 @@
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h5 class="card-title m-0"><b>Estimasi Pendaftar Tahun <?= date('Y') ?></b></h5>
+                <h5 class="card-title m-0"><b>Pengguna Aktif Tahun <?= date('Y') ?></b></h5>
             </div>
             <div class="card-body">
 
@@ -46,7 +46,7 @@
                         <span class="info-box-icon bg-info"><i class="fas fa-graduation-cap"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Jumlah Pendaftar</span>
+                            <span class="info-box-text">Jumlah Pengguna</span>
                             <span class="info-box-number"><?= "aaa" ?></span>
                         </div>
                         <!-- /.info-box-content -->

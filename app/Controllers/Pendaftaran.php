@@ -6,11 +6,17 @@ use App\Controllers\BaseController;
 
 class Pendaftaran extends BaseController
 {
+	public function __construct()
+	{
+		helper('form');
+	}
+
 	public function index()
 	{
 		$data = [
 			'title' => 'Peda-Pedo',
-			'subtitle' => 'Pedaftaran'
+			'subtitle' => 'Pedaftaran',
+			'validation' =>  \Config\Services::validation(),
 		];
 		echo view('v_pendaftaran', $data);
 	}
@@ -19,67 +25,39 @@ class Pendaftaran extends BaseController
 	{
 		if ($this->validate(
 			[
-				'nisn' => [
-					'label' => 'NISN',
-					'rules'  => 'required|max_length[10]|is_unique[tbl_siswa.nisn]',
+				'nik' => [
+					'label' => 'NIK',
+					'rules'  => 'required|min_length[16]',
 					'errors' => [
 						'required' => '{field} Wajib Diisi !!',
-						'max_length' => '{field} Max 10 Karakter !!',
-						'is_unique' => '{field} Ini Sudah Terdaftar !!',
+						'max_length' => '{field} Max 16 Karakter !!',
+						// 'is_unique' => '{field} Ini Sudah Terdaftar !!',
 					]
 				],
-				'nama_lengkap'    => [
-					'label' => 'Nama Lengkap',
+				'no_telp'    => [
+					'label' => 'No Handphone',
 					'rules'  => 'required',
 					'errors' => [
 						'required' => '{field} Wajib Diisi !!'
 					]
 				],
-				'id_jalur_masuk'    => [
-					'label' => 'Jalur Masuk',
+				'email'    => [
+					'label' => 'Alamat Email',
 					'rules'  => 'required',
 					'errors' => [
 						'required' => '{field} Wajib Diisi !!'
 					]
 				],
-				'nama_panggilan'    => [
-					'label' => 'Nama Panggilan',
+				'password'    => [
+					'label' => 'Password',
 					'rules'  => 'required',
 					'errors' => [
 						'required' => '{field} Wajib Diisi !!'
 					]
 				],
-				'tempat_lahir'    => [
-					'label' => 'Tempat Lahir',
-					'rules'  => 'required',
-					'errors' => [
-						'required' => '{field} Wajib Diisi !!'
-					]
-				],
-				'jk'    => [
-					'label' => 'Jenis Kelamin',
-					'rules'  => 'required',
-					'errors' => [
-						'required' => '{field} Wajib Diisi !!'
-					]
-				],
-				'tanggal'    => [
-					'label' => 'Tanggal',
-					'rules'  => 'required',
-					'errors' => [
-						'required' => '{field} Wajib Diisi !!'
-					]
-				],
-				'bulan'    => [
-					'label' => 'Bulan',
-					'rules'  => 'required',
-					'errors' => [
-						'required' => '{field} Wajib Diisi !!'
-					]
-				],
-				'tahun'    => [
-					'label' => 'Tahun',
-					'rules'  => 'required',
+				'repassword'    => [
+					'label' => 'Re-Password',
+					'rules'  => 'matches[password]',
 					'errors' => [
 						'required' => '{field} Wajib Diisi !!'
 					]
@@ -87,32 +65,19 @@ class Pendaftaran extends BaseController
 			]
 		)) {
 			//jika tidak ada validasi maka simpan data
-			$ta = $this->ModelTa->statusTa();
-			$tahun = $this->request->getPost('tahun');
-			$bulan = $this->request->getPost('bulan');
-			$tanggal = $this->request->getPost('tanggal');
-			$no_pendaftaran = $this->ModelSiswa->noPendaftaran();
 			$data = [
-				'no_pendaftaran' => $no_pendaftaran,
-				'tahun'			=> $ta['tahun'],
-				'tgl_pendaftaran' => date('Y-m-d'),
-				'id_jurusan' => $this->request->getPost('id_jurusan'),
-				'nisn' => $this->request->getPost('nisn'),
-				'id_jalur_masuk' => $this->request->getPost('id_jalur_masuk'),
-				'nama_lengkap' => $this->request->getPost('nama_lengkap'),
-				'nama_panggilan' => $this->request->getPost('nama_panggilan'),
-				'tempat_lahir' => $this->request->getPost('tempat_lahir'),
-				'jk' => $this->request->getPost('jk'),
-				'tgl_lahir' => $tahun . '-' . $bulan . '-' . $tanggal,
-				'password' =>   $this->request->getPost('nisn'),
+				'nik' => $this->request->getPost('nisn'),
+				'no_telp' => $this->request->getPost('no_telp'),
+				'email' => $this->request->getPost('email'),
+				'password' => $this->request->getPost('password'),
 			];
-			$this->ModelSiswa->insertData($data);
-			session()->setFlashdata('pesan', 'Pendaftaran Behasil, Silahkan Login Untuk Melengkapi Data !!!');
-			return redirect()->to('/Pendaftaran');
+			// $this->ModelUser->insertData($data);
+			session()->setFlashdata('pesan', 'Pendaftaran Behasil, Silahkan Aktivasi Akun Anda !!!');
+			return redirect()->to('/Aktivasi');
 		} else {
 			//jika ada validasi
 			$validation =  \Config\Services::validation();
-			return redirect()->to('/Pendaftaran')->withInput()->with('validation', $validation);
+			return redirect()->to('/Aktivasi')->withInput()->with('validation', $validation);
 		}
 	}
 }
