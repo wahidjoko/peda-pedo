@@ -79,7 +79,7 @@
                     <!-- /.info-box -->
                 </div>
                 <div class="col-md-12 col-sm-12 col-12">
-                    <a href="<?= base_url('Pendaftaran') ?>" class="btn btn-info btn-flat btn-block"><i class="fas fa-file-alt"></i> Mendaftar</a>
+                    <a href="<?= base_url('Daftar') ?>" class="btn btn-info btn-flat btn-block"><i class="fas fa-file-alt"></i> Mendaftar</a>
                 </div>
             </div>
         </div>
