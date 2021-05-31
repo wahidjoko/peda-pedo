@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ModelUser;
 
 class Daftar extends BaseController
 {
 	public function __construct()
 	{
 		helper('form');
+		$this->ModelUser = new ModelUser();
 	}
 
 	public function index()
@@ -66,8 +68,11 @@ class Daftar extends BaseController
 		)) {
 			$data = [
 				'nik' => $this->request->getPost('nik'),
+				'no_telp' => $this->request->getPost('no_telp'),
+				'email' => $this->request->getPost('email'),
+				'password' => $this->request->getPost('repassword'),
 			];
-			// $this->ModelUser->insertData($data);
+			$this->ModelUser->insertData($data);
 			session()->setFlashdata('pesan', 'Pendaftaran akun berhasil,silahkan untuk Aktivasi Akun');
 			return redirect()->to('/Aktivasi');
 		} else {

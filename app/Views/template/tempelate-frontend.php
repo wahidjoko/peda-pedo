@@ -41,10 +41,24 @@
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="" role="button">
-                            <i class="fas fa-user"></i> Login/Register
+                        <?php if (session()->get('nik') == "") { ?>
+                            <a class="nav-link" href="<?= base_url('Auth/loginUser') ?>">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                        <?php } else { ?>
+                    <li class="nav-item dropdown">
+                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                            <i class="fas fa-user"></i> <?= session()->get('nama_lengkap') ?>
                         </a>
+                        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                            <li><a href="<?= base_url('Admin') ?>" class="dropdown-item">Biodata</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a href="<?= base_url('Auth/logout') ?>" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
+                        </ul>
                     </li>
+                <?php } ?>
+
+                </li>
                 </ul>
             </div>
         </nav>

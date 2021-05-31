@@ -7,7 +7,9 @@
 </div>
 
 <div class="col-sm-7 mt-3">
-
+    <?php
+    echo form_open('Daftar/simpan');
+    ?>
     <?php
     echo form_open('Daftar/simpan');
     ?>
